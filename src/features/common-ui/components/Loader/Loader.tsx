@@ -1,3 +1,10 @@
 import React from 'react';
 
-export const Loader = () => <div>LOADING</div>;
+import styles from './styles.scss';
+
+export const Loader = () => (
+  <div className={styles.ripple}>
+    <div />
+    <div />
+  </div>
+);

@@ -9,6 +9,7 @@ import { PLAYLISTS } from '../../constants';
 import { Playlist } from '../../components/Playlist';
 import { PlaylistChooser } from '../../components/PlaylistChooser';
 import { MusicStore } from '../../reducer';
+import styles from './styles.scss';
 
 export type MusicProps = {
   playlist: MusicStore['playlist'];
@@ -19,8 +20,12 @@ export type MusicProps = {
 export const MusicComponent = ({ playlist, isLoading, onChoose }: MusicProps) => (
   <div>
     <h2>Playlist browser</h2>
-    <PlaylistChooser onChoose={onChoose} playlists={PLAYLISTS} />
-    {isLoading ? <Loader /> : null}
+    <PlaylistChooser onChoose={onChoose} playlists={PLAYLISTS} isDisabled={isLoading} />
+    {isLoading ? (
+      <div className={styles.loader}>
+        <Loader />
+      </div>
+    ) : null}
     {!isLoading && playlist ? <Playlist playlist={playlist} /> : null}
   </div>
 );
