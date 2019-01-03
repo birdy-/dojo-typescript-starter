@@ -17,7 +17,6 @@
   },
   "homepage": "https://github.com/birdy-/dojo-typescript-starter#readme",
   "dependencies": {
-    "@types/ramda": "^0.25.46",
     "ramda": "^0.26.1",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
@@ -34,6 +33,7 @@
     "@babel/preset-react": "^7.0.0",
     "@types/jest": "^23.3.11",
     "@types/node": "^10.12.18",
+    "@types/ramda": "^0.25.46",
     "@types/react-dom": "^16.0.11",
     "@types/react-redux": "^6.0.11",
     "@types/react-router-dom": "^4.3.1",

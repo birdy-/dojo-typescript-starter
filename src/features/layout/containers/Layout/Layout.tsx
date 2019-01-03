@@ -6,7 +6,7 @@ export type LayoutProps = {
 
 export const Layout = ({ children }: LayoutProps) => (
   <Fragment>
-    <h1>TypeScript Dojo</h1>
+    <h1>Music Dojo</h1>
     {children}
   </Fragment>
 );

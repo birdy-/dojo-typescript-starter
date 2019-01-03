@@ -2,6 +2,7 @@ import React from 'react';
 import { ThunkDispatch } from 'redux-thunk';
 import { connect } from 'react-redux';
 import { Store } from '@store';
+import { Loader } from '@features/common-ui';
 
 import { getPlaylist } from '../../actions';
 import { PLAYLISTS } from '../../constants';
@@ -11,19 +12,22 @@ import { MusicStore } from '../../reducer';
 
 export type MusicProps = {
   playlist: MusicStore['playlist'];
+  isLoading: MusicStore['isLoading'];
   onChoose: (playlistId: number) => void;
 };
 
-export const MusicComponent = ({ playlist, onChoose }: MusicProps) => (
+export const MusicComponent = ({ playlist, isLoading, onChoose }: MusicProps) => (
   <div>
-    <p>Display playlist</p>
+    <h2>Playlist browser</h2>
     <PlaylistChooser onChoose={onChoose} playlists={PLAYLISTS} />
-    {playlist ? <Playlist playlist={playlist} /> : null}
+    {isLoading ? <Loader /> : null}
+    {!isLoading && playlist ? <Playlist playlist={playlist} /> : null}
   </div>
 );
 
 const mapStateToProps = (state: Store) => ({
   playlist: state.music.playlist,
+  isLoading: state.music.isLoading,
 });
 
 const mapDispatchToProps = (dispatch: ThunkDispatch<any, any, any>) => ({
