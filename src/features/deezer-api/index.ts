@@ -72,9 +72,19 @@ export type DeezerPlaylist = {
   };
 };
 
+export type DeezerSearchResults = {
+  data: DeezerTrack[] | null;
+  next: string;
+  total: number;
+};
+
 const getPlaylist = async (id: number): Promise<DeezerPlaylist> =>
   fetch(`${CORS_PROXY_URL}${DEEZER_API_URL}playlist/${id}`).then(response => response.json());
 
+const search = async (search: string): Promise<DeezerSearchResults> =>
+  fetch(`${CORS_PROXY_URL}${DEEZER_API_URL}search/?q=${search}`).then(response => response.json());
+
 export const deezerApi = {
   getPlaylist,
+  search,
 };
