@@ -1,4 +1,4 @@
-import { pipe, assoc } from 'ramda';
+import { assoc, compose } from 'ramda';
 import { DeezerPlaylist } from '@features/deezer-api';
 import { receivedDeezerPlaylist, getDeezerPlaylist } from './actions';
 
@@ -20,11 +20,10 @@ export const musicReducer = (state: MusicStore = initialState, action: MusicActi
       return assoc('isLoading', true, state);
     }
     case 'RECEIVED_DEEZER_PLAYLIST': {
-      // return assoc('isLoading', false, assoc('playlist', action.payload, state));
-      return pipe(
+      return compose(
         assoc('playlist', action.payload),
         assoc('isLoading', false)
-      )(state);
+      )(state) as MusicStore;
     }
     default:
       return state;
