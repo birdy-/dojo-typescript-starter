@@ -1,10 +1,16 @@
 import { ThunkDispatch } from 'redux-thunk';
-import { deezerApi, DeezerPlaylist } from '@features/deezer-api';
+import { deezerApi, DeezerPlaylist, DeezerSearchResults } from '@features/deezer-api';
 
 export const getPlaylist = (playlistId: number) => (dispatch: ThunkDispatch<any, any, any>) => {
   dispatch(getDeezerPlaylist());
   deezerApi.getPlaylist(playlistId).then(payload => {
     dispatch(receivedDeezerPlaylist(payload));
+  });
+};
+
+export const search = (search: string) => (dispatch: ThunkDispatch<any, any, any>) => {
+  deezerApi.search(search).then(payload => {
+    dispatch(receivedDeezerSearch(payload));
   });
 };
 
@@ -17,7 +23,13 @@ const receivedDeezerPlaylist = (payload: DeezerPlaylist) => ({
   payload,
 });
 
+const receivedDeezerSearch = (payload: DeezerSearchResults) => ({
+  type: 'RECEIVED_DEEZER_SEARCH' as 'RECEIVED_DEEZER_SEARCH',
+  payload,
+});
+
 export const actions = {
   getDeezerPlaylist,
   receivedDeezerPlaylist,
+  receivedDeezerSearch,
 };

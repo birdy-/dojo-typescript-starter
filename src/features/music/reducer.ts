@@ -1,14 +1,16 @@
 import { assoc, compose } from 'ramda';
-import { DeezerPlaylist } from '@features/deezer-api';
+import { DeezerPlaylist, DeezerSearchResults } from '@features/deezer-api';
 import { actions } from './actions';
 
 export type MusicStore = {
   playlist: DeezerPlaylist | null;
+  search: DeezerSearchResults | null;
   isLoading: boolean;
 };
 
 const initialState: MusicStore = {
   playlist: null,
+  search: null,
   isLoading: false,
 };
 
@@ -24,6 +26,9 @@ export const musicReducer = (state: MusicStore = initialState, action: MusicActi
         assoc('playlist', action.payload),
         assoc('isLoading', false)
       )(state) as MusicStore;
+    }
+    case 'RECEIVED_DEEZER_SEARCH': {
+      return assoc('search', action.payload, state);
     }
     default:
       return state;
