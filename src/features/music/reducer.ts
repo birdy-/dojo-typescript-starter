@@ -1,6 +1,6 @@
 import { assoc, compose } from 'ramda';
 import { DeezerPlaylist } from '@features/deezer-api';
-import { receivedDeezerPlaylist, getDeezerPlaylist } from './actions';
+import { actions } from './actions';
 
 export type MusicStore = {
   playlist: DeezerPlaylist | null;
@@ -12,7 +12,7 @@ const initialState: MusicStore = {
   isLoading: false,
 };
 
-export type MusicAction = ReturnType<typeof receivedDeezerPlaylist> | ReturnType<typeof getDeezerPlaylist>;
+export type MusicAction = ReturnType<typeof actions[keyof typeof actions]>;
 
 export const musicReducer = (state: MusicStore = initialState, action: MusicAction): MusicStore => {
   switch (action.type) {
